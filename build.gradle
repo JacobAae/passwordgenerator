@@ -1,0 +1,41 @@
+apply plugin: 'idea'
+apply plugin: 'scala'
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "http://oss.sonatype.org/content/repositories/releases" }
+    maven { url "http://repo.typesafe.com/typesafe/releases/" }
+    maven { url "http://repo.spray.io" }
+}
+
+dependencies {
+    def scalaVersion = '2.11'
+    def akkaStreamVersion = '1.0-RC2'
+    def sprayVersion = '1.3.3'
+
+    compile "com.typesafe.akka:akka-actor_${scalaVersion}:2.3.11"
+    compile "com.typesafe.akka:akka-stream-experimental_${scalaVersion}:${akkaStreamVersion}"
+    compile "com.typesafe.akka:akka-http-core-experimental_${scalaVersion}:${akkaStreamVersion}"
+    compile "com.typesafe.akka:akka-http-scala-experimental_${scalaVersion}:${akkaStreamVersion}"
+    compile "com.typesafe.akka:akka-http-spray-json-experimental_${scalaVersion}:${akkaStreamVersion}"
+    compile "com.typesafe.akka:akka-http-testkit-scala-experimental_${scalaVersion}:${akkaStreamVersion}"
+
+    compile "io.spray:spray-can_${scalaVersion}:${sprayVersion}"
+    compile "io.spray:spray-routing_${scalaVersion}:${sprayVersion}"
+    compile "io.spray:spray-testkit:1.3.1"  // test
+
+    compile "org.json4s:json4s-native_${scalaVersion}:3.2.11"
+    compile "com.typesafe.scala-logging:scala-logging-slf4j_${scalaVersion}:2.1.2"
+
+    testCompile "org.codehaus.groovy:groovy-all:2.4.3"
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+    testRuntime "cglib:cglib-nodep:3.1"
+    testRuntime "org.objenesis:objenesis:2.1"
+
+}
+
+mainClassName = "Boot"
